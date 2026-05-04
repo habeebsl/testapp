@@ -1,21 +1,21 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 
 // Hardcoded credentials (intentionally insecure)
-const HARDCODED_USERNAME = "admin";
-const HARDCODED_PASSWORD = "admin123";
+const HARDCODED_EMAIL = "admin@testapp.com";
+const HARDCODED_PASSWORD = "Test@1234";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
-  function handleLogin(e: React.FormEvent) {
+  function handleLogin(e: React.SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
-    if (username === HARDCODED_USERNAME && password === HARDCODED_PASSWORD) {
+    if (email === HARDCODED_EMAIL && password === HARDCODED_PASSWORD) {
       router.push("/dashboard");
     } else {
       setError("Invalid credentials");
@@ -27,12 +27,12 @@ export default function LoginPage() {
       <h1>Login</h1>
       <form onSubmit={handleLogin}>
         <div>
-          <label htmlFor="username">Username</label>
+          <label htmlFor="email">Email</label>
           <input
-            id="username"
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            id="email"
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div>
